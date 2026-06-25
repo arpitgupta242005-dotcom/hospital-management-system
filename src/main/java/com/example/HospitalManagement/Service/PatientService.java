@@ -5,6 +5,8 @@ import com.example.hospitalManagement.exception.ResourceNotFoundException;
 import com.example.hospitalManagement.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,8 @@ public class PatientService {
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + id));
     }
 
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public Page<Patient> getAllPatients(Pageable pageable) {
+        return patientRepository.findAll(pageable);
     }
 
     public Patient addPatient(Patient patient) {
@@ -42,5 +44,17 @@ public class PatientService {
 
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    public List<Patient> getPatientsByGender(String gender) {
+        return patientRepository.findByGender(gender);
+    }
+
+    public List<Patient> getPatientsByBloodGroup(String bloodGroup) {
+        return patientRepository.findByBloodGroup(bloodGroup);
+    }
+
+    public List<Patient> searchPatientsByName(String name) {
+        return patientRepository.searchByName(name);
     }
 }

@@ -2,9 +2,7 @@ package com.example.hospitalManagement.entity;
 
 import com.example.HospitalManagement.Entity.type.BloodGroupType;
 import jakarta.persistence.*;
-import lombok.Data; // ➔ Ye import check kar lena
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,16 +10,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Getter
-@Setter
-
 @Table(
         name="patient_tbl",
         uniqueConstraints = {
+                //dublicate add nahi karega
                 @UniqueConstraint(name="unique_patient_email",columnNames = {"email"}),
                 @UniqueConstraint(name="unique_patient_name_birthdate",columnNames={"name","birthDate"})
         },
         indexes={
+                //search fast karta he
                 @Index(name="idx_patient_birth_date",columnList="birthDate")
         }
 )
@@ -41,7 +38,7 @@ public class Patient {
     private String email;
     private String gender;
 
-    @CreationTimestamp
+    @CreationTimestamp//Automatically current time insert.
     @Column(updatable = false)
     private LocalDateTime createdAt;
 

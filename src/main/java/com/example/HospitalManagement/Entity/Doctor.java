@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//auto increment id
     private Long id;
 
     @Column(nullable = false, length = 48)
