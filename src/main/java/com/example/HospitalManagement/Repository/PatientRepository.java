@@ -11,12 +11,12 @@ import java.util.List;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
-    @Query("SELECT p FROM Patient p WHERE p.gender = :gender")
+    @Query("SELECT p FROM Patient p WHERE p.gender = :gender")//JPQL query
     List<Patient> findByGender(@Param("gender") String gender);
 
-    @Query("SELECT p FROM Patient p WHERE p.bloodGroup = :bloodGroup")
+    @Query("SELECT p FROM Patient p WHERE p.bloodGroup = :bloodGroup")//JPQL query
     List<Patient> findByBloodGroup(@Param("bloodGroup") String bloodGroup);
 
-    @Query(value = "SELECT * FROM patient_tbl WHERE name ILIKE %:name%", nativeQuery = true)
+    @Query(value = "SELECT * FROM patient_tbl WHERE name ILIKE %:name%", nativeQuery = true)//JPQL query
     List<Patient> searchByName(@Param("name") String name);
 }
